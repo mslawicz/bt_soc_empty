@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!--HID over GATT-->
-<gatt gatt_caching="true" generic_attribute_service="true" header="gatt_db.h" name="HID over GATT" out="gatt_db.c" prefix="gattdb_">
+<!--Game Controller-->
+<gatt gatt_caching="true" generic_attribute_service="true" header="gatt_db.h" name="Game Controller" out="gatt_db.c" prefix="gattdb_">
 
   <!--Human Interface Device-->
-  <service advertise="false" id="human_interface_device" name="Human Interface Device" requirement="mandatory" sourceId="org.bluetooth.service.human_interface_device" type="primary" uuid="1812">
+  <service advertise="true" id="human_interface_device" name="Human Interface Device" requirement="mandatory" sourceId="org.bluetooth.service.human_interface_device" type="primary" uuid="1812">
     <informativeText>Abstract: This service exposes the HID reports and other HID data intended for HID Hosts and HID Devices.
 Summary: The HID Service exposes characteristics required for a HID Device to transfer HID report descriptors and reports to a HID Host. This also exposes the characteristics for a HID Host to write to a Device. The Human Interface Device Service is instantiated as a Primary Service. </informativeText>
 
@@ -31,7 +31,7 @@ Summary:
       <value length="8" type="hex" variable_length="false">00000000000003AA</value>
       <properties>
         <read authenticated="false" bonded="false" encrypted="false"/>
-        <write authenticated="false" bonded="false" encrypted="false"/>
+        <notify authenticated="false" bonded="false" encrypted="false"/>
       </properties>
 
       <!--Report Reference-->
@@ -43,7 +43,7 @@ Summary:
         <properties>
           <read authenticated="false" bonded="false" encrypted="false"/>
         </properties>
-        <value length="2" type="hex" variable_length="false">0001</value>
+        <value length="2" type="hex" variable_length="false">0000</value>
       </descriptor>
     </characteristic>
 
@@ -68,7 +68,7 @@ Summary:
         <properties>
           <read authenticated="false" bonded="false" encrypted="false"/>
         </properties>
-        <value length="2" type="hex" variable_length="false">0001</value>
+        <value length="2" type="hex" variable_length="false">0000</value>
       </descriptor>
     </characteristic>
 
@@ -185,38 +185,6 @@ Summary:
       <value length="7" type="hex" variable_length="false">01046DC3160100</value>
       <properties>
         <read authenticated="false" bonded="false" encrypted="false"/>
-      </properties>
-    </characteristic>
-  </service>
-
-  <!--Scan Parameters-->
-  <service advertise="false" id="scan_parameters" name="Scan Parameters" requirement="mandatory" sourceId="org.bluetooth.service.scan_parameters" type="primary" uuid="1813">
-    <informativeText>Abstract: This service enables a GATT Client to store the LE scan parameters it is using on a GATT Server device so that the GATT Server can  utilize the information to adjust behavior to optimize power consumption and/or reconnection latency
-Summary: The Scan Parameters Service enables a GATT Server device to expose a characteristic for the GATT Client to write its scan interval and scan window on the GATT Server device.</informativeText>
-
-    <!--Scan Interval Window-->
-    <characteristic const="false" id="scan_interval_window" name="Scan Interval Window" sourceId="org.bluetooth.characteristic.scan_interval_window" uuid="2A4F">
-      <informativeText>Abstract: 
-    The Scan Interval Window characteristic is used to store the scan parameters of the GATT Client. Included in this characteristic are the Scan Interval and Scan Window of the GATT Client device.
-		
-Summary: 
-    The Scan Interval Window characteristic is used to store the scan parameters of the GATT Client.  The GATT Server can use these values to optimize its own advertisement rate and to minimize 
-    the rate of its own advertisements while also minimizing the latency of reconnections.
-    </informativeText>
-      <value length="4" type="hex" variable_length="false"/>
-      <properties>
-        <write_no_response authenticated="false" bonded="false" encrypted="false"/>
-      </properties>
-    </characteristic>
-
-    <!--Scan Refresh-->
-    <characteristic const="false" id="scan_refresh" name="Scan Refresh" sourceId="org.bluetooth.characteristic.scan_refresh" uuid="2A31">
-      <informativeText>Abstract:             
-        The Scan Refresh characteristic is used to notify the Client that the Server requires the Scan Interval Window characteristic to be written with the latest values upon notification. 
-		</informativeText>
-      <value length="1" type="hex" variable_length="false">00</value>
-      <properties>
-        <notify authenticated="false" bonded="false" encrypted="false"/>
       </properties>
     </characteristic>
   </service>
